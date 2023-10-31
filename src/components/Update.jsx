@@ -2,12 +2,20 @@ import { useLoaderData } from "react-router-dom";
 
 const Update = () => {
   const data = useLoaderData();
-  console.log(data);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    console.log(name, email);
+  };
+
   return (
     <div>
       {" "}
       <div className="flex justify-center pt-5">
-        <form className="flex flex-col w-[25%] gap-y-2">
+        <form onSubmit={handleSubmit} className="flex flex-col w-[25%] gap-y-2">
           <input
             className="border px-2 py-1 capitalize "
             type="text"
@@ -29,7 +37,7 @@ const Update = () => {
               className="text-white bg-blue-600 py-1.5 w-28 rounded-md"
               type="submit"
             >
-              Submit
+              Update
             </button>
           </div>
         </form>
