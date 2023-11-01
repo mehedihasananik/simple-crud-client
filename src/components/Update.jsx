@@ -2,13 +2,27 @@ import { useLoaderData } from "react-router-dom";
 
 const Update = () => {
   const data = useLoaderData();
+  console.log(data);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
-    console.log(name, email);
+    const user = { name, email };
+
+    fetch(`http://localhost:5000/users/${data._id}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          alert("updated successfully");
+        }
+      });
   };
 
   return (
